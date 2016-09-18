@@ -167,6 +167,12 @@ class PixCustomifyPlugin {
 //		add_action( 'wp_ajax_nopriv_pixcustomify_image_click', array( &$this, 'ajax_click_on_photo' ) );
 	}
 
+	function include_builder() {
+		include_once( 'features/class-Multi_Pages.php' );
+
+		$mp_obj = Customify_Multi_Pages::get_instance();
+	}
+
 	/**
 	 * Return an instance of this class.
 	 * @since     1.0.0

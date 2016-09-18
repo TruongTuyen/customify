@@ -1,0 +1,25 @@
+#available-multi_page-items {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: -301px;
+	visibility: hidden;
+	overflow-x: hidden;
+	overflow-y: auto;
+	width: 300px;
+	margin: 0;
+	z-index: 4;
+	background: #eee;
+	-webkit-transition: left .18s;
+	transition: left .18s;
+	border-right: 1px solid #ddd;
+
+	.clear-results {
+		display: none;
+	}
+}
+
+body.adding-multi_page-items #available-multi_page-items {
+	left: 0;
+	visibility: visible;
+}

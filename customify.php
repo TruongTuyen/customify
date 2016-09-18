@@ -68,3 +68,5 @@ register_activation_hook( __FILE__, array( 'PixCustomifyPlugin', 'activate' ) );
 
 global $pixcustomify_plugin;
 $pixcustomify_plugin = PixCustomifyPlugin::get_instance();
+
+$pixcustomify_plugin->include_builder();
