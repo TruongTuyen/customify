@@ -17,9 +17,38 @@
 	.clear-results {
 		display: none;
 	}
+
+	.item-add {
+		position: absolute;
+		left: 7px;
+		top: 12px;
+	}
+
+	.menu-item-handle {
+		padding-left: 30px;
+	}
+
+	.item-add:before {
+		content: "\f132";
+		display: inline-block;
+		position: relative;
+		left: -2px;
+		top: -1px;
+		font: normal 20px/1 dashicons;
+		vertical-align: middle;
+		-webkit-transition: all 0.2s;
+		transition: all 0.2s;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
 }
 
 body.adding-multi_page-items #available-multi_page-items {
 	left: 0;
 	visibility: visible;
+}
+
+#accordion-section-customify_add_mp {
+	margin: 20px 0;
 }

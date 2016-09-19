@@ -31,7 +31,8 @@ class Customify_Multi_Pages {
 
 		$data = array(
 			'nonce' => wp_create_nonce( 'customize-multi-page' ),
-			'data' => $mp
+			'data' => $mp,
+			'customizingMultiPages'  => sprintf( __( 'Customizing &#9656; %s' ), 'Multi-Page' ),
 		);
 
 		wp_localize_script( 'customify_mp', 'customify_mp', $data );
@@ -65,7 +66,7 @@ class Customify_Multi_Pages {
 
 		// Add the add-new-multi_page section and controls.
 		$wp_customize->add_section( new WP_Customize_Add_Section_Button( $wp_customize, 'customify_add_mp', array(
-			'title'    => __( 'Add multi_page' ),
+			'title'    => __( 'Add Multi Page' ),
 			'panel'    => 'customify_mp',
 			'priority' => 999,
 		) ) );
@@ -78,20 +79,9 @@ class Customify_Multi_Pages {
 			'settings'    => array(),
 			'input_attrs' => array(
 				'class'       => 'multi_page-name-field',
-				'placeholder' => __( 'New multi_page name' ),
+				'placeholder' => __( 'New Multi Page name' ),
 			),
 		) );
-
-//		$wp_customize->add_control( new WP_Customize_Add_Section_Control( $wp_customize, 'customify_create_mp', array(
-//			'section'  => 'customify_add_mp',
-//			'settings' => array(),
-//		) ) );
-
-//		$wp_customize->add_setting(
-//			'customify_new_mp', array(
-//				'transport' => 'postMessage'
-//			)
-//		);
 	}
 
 	public function print_templates() {?>
@@ -133,21 +123,15 @@ class Customify_Multi_Pages {
 				<ul class="accordion-section-content" data-type="search"></ul>
 			</div>
 			<div id="available-menu-items-post_type-page" class="accordion-section">
-				<h4 class="accordion-section-title" role="presentation">
-					Pages
+				<h3 class="accordion-section-title" role="presentation">
+					<strong>Pages List</strong>
 					<span class="spinner"></span>
 					<span class="no-items"><?php _e( 'No items' ); ?></span>
 					<button type="button" class="button-link" aria-expanded="false">
-							<span class="screen-reader-text"><?php
-								/* translators: %s: Title of a section with menu items */
-								printf( __( 'Toggle section: %s' ), esc_html( 'Pages' ) ); ?></span>
-						<span class="toggle-indicator" aria-hidden="true"></span>
 					</button>
-				</h4>
+				</h3>
 				<ul class="accordion-section-content" data-type="page" data-object="page"></ul>
 			</div>
-			<?php
-			// Containers for per-post-type item browsing; items added with JS.?>
 		</div><!-- #available-multi_page-items -->
 		<?php
 	}

@@ -15,7 +15,7 @@
 
 		var control = new api.Control( name, {
 			params: {
-				content: '<li id="customize-control-customify_new_mp" class="customize-control customize-control-text"><label><input type="text" class="multi_page-name-field" placeholder="Root Page ID"  value=""  /></label><button type="button" class="button-secondary add-root-page add-multi-page-toggle" aria-expanded="false">Add root</button></li>',
+				content: '<li id="customize-control-customify_new_mp" class="customize-control customize-control-text"><label><input type="hidden" class="multi_page-name-field" placeholder="Root Page ID"  value=""  /></label><button type="button" class="button-secondary add-page-button add-multi-page-toggle" aria-expanded="false">Add Page</button></li>',
 				priority: 10,
 				section: id,
 				type: "text"
@@ -29,33 +29,14 @@
 
 		return new_ctrl;
 	}
-
-	function add_childs_control( id ) {
-		var name = id + '_childs_control';
-
-		var control = new api.Control( name, {
-			params: {
-				content: '<li id="customize-control-customify_new_mp" class="customize-control customize-control-text"><label><input type="text" class="multi_page-name-field" placeholder="Set kids ids"  value=""  /></label><button type="button" class="button-secondary add-kid-page add-multi-page-toggle" aria-expanded="false">Add kids</button></li>',
-				priority: 10,
-				section: id,
-				type: "text"
-			},
-			previewer: api.previewer
-		} );
-
-		var new_ctrl = api.control.add( id, control );
-		new_ctrl.activate();
-
-		return new_ctrl;
-	}
-
 
 	function add_new_section( id ) {
 		var data = {
 			id: id,
 			panel: "customify_mp",
 			title: id,
-			priority: 1
+			priority: 1,
+			customizeAction: customify_mp.customizingMultiPages
 		};
 
 		var section = new api.Section( id, {
@@ -65,10 +46,6 @@
 		var news = api.section.add( id, section );
 		news.activate();
 
-
-		console.log( news );
-
-		add_childs_control( id );
 		add_root_control( id );
 
 		news.focus();
@@ -96,17 +73,17 @@
 			}
 		});
 
-		$(document).on('click', '.add-root-page, .add-kid-page',function ( ev ) {
+		$(document).on('click', '.add-page-button',function ( ev ) {
 
 			var input = $(this).siblings('label').find('input');
-console.log('click?');
+
 			api.CMP.addMPPanel.open( input );
 
+			$('body').addClass('adding-multi_page-items');
 		});
 
 	} );
 
-	$('body').addClass('adding-multi_page-items');
 	api.CMP.addMPPanel.open = function ( input ) {
 		api.CMP.addMPPanel.loadPages();
 		// add show class to body
@@ -115,11 +92,11 @@ console.log('click?');
 
 	api.CMP.addMPPanel.loadPages = function() {
 
-		console.log('load');
-		var self = this, params, request, itemTemplate, availableMenuItemContainer;
+		var self = this, params, request, itemTemplate, availableMenuItemContainer,
+			object = 'page',
+			type = 'post_type';
+
 		itemTemplate = wp.template( 'available-menu-item' );
-		var object = 'page';
-		var type = 'post_type';
 
 		availableMenuItemContainer = $( '#available-multi_page-items' );
 		availableMenuItemContainer.find( '.accordion-section-title' ).addClass( 'loading' );
@@ -135,21 +112,7 @@ console.log('click?');
 
 			var items, typeInner;
 			items = data.items;
-			// if ( 0 === items.length ) {
-			// 	if ( 0 === self.pages[ type + ':' + object ] ) {
-			// 		availableMenuItemContainer
-			// 			.addClass( 'cannot-expand' )
-			// 			.removeClass( 'loading' )
-			// 			.find( '.accordion-section-title > button' )
-			// 			.prop( 'tabIndex', -1 );
-			// 	}
-			// 	self.pages[ type + ':' + object ] = -1;
-			// 	return;
-			// }
-			console.log(items);
-			// return;
-			// items = new api.Menus.AvailableItemCollection( items ); // @todo Why is this collection created and then thrown away?
-			// self.collection.add( items.models );
+
 			typeInner = availableMenuItemContainer.find( '.accordion-section-content' );
 			for (var key in items) {
 				var menuItem = items[key];

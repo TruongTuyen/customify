@@ -1,4 +1,9 @@
 #available-multi_page-items { position: absolute; top: 0; bottom: 0; left: -301px; visibility: hidden; overflow-x: hidden; overflow-y: auto; width: 300px; margin: 0; z-index: 4; background: #eee; transition: left .18s; border-right: 1px solid #ddd; }
 #available-multi_page-items .clear-results { display: none; }
+#available-multi_page-items .item-add { position: absolute; left: 7px; top: 12px; }
+#available-multi_page-items .menu-item-handle { padding-left: 30px; }
+#available-multi_page-items .item-add:before { content: "\f132"; display: inline-block; position: relative; left: -2px; top: -1px; font: normal 20px/1 dashicons; vertical-align: middle; transition: all 0.2s; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
 body.adding-multi_page-items #available-multi_page-items { left: 0; visibility: visible; }
+
+#accordion-section-customify_add_mp { margin: 20px 0; }
